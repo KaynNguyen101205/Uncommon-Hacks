@@ -21,41 +21,12 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <h1 id="fileEncryption">File Encryption with AES</h1>
-        <input type="file" id="fileInput">
-        <button id="encryptButton">Encrypt File</button>
-        <button id="downloadEncryptedButton">Download Encrypted File</button>
-        <button id="uploadPinataButton">Upload Encrypted File to Pinata</button>
-
-        <hr>
-
-        <h1 id="fileDecryption">File Decryption</h1>
-        <p>
-            Enter AES Key (hex):
-            <input type="text" id="aesKeyInput" placeholder="Paste your AES key here">
-        </p>
-        <p>
-            Select Encrypted File (JSON):
-            <input type="file" id="encryptedFileInput">
-        </p>
-        <button id="uploadDecryptButton">Upload File to Decrypt</button>
-        <button id="downloadDecryptedButton">Download Decrypted File</button>
-
-        <hr>
-
-        <h1 id="contractInteraction">Smart Contract Interaction (Midnight)</h1>
-        <div>
-            <label for="fileCIDInput">File CID:</label>
-            <input type="text" id="fileCIDInput" placeholder="Enter file CID">
+        <div class="main-content">
+            <div class="welcome-message">
+                <h1>Welcome to your secure data journey!</h1>
+                <p>Please choose from the sidebar options.</p>
+            </div>
         </div>
-        <div>
-            <label for="userAddressInput">User Address:</label>
-            <input type="text" id="userAddressInput" placeholder="Enter user address">
-        </div>
-        <button id="registerFileButton">Register File</button>
-        <button id="checkAccessButton">Check Access</button>
-
-        <script type="module" src="script.js"></script>
     </div>
 </body>
 </html>

@@ -3,46 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure file encryption tool using AES encryption">
     <title>File Encryption</title>
+    
+    <!-- Fonts and CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
+
 <body>
-    <!-- Sidebar (same across all pages) -->
-    <div class="sidebar">
-        <ul>
-            <li><a href="fileEncrypt.html">File Encryption</a></li>
-            <li><a href="decryption.html">File Decryption</a></li>
-            <li><a href="contract.html">Smart Contract Interaction</a></li>
-            <li><a href="secret.html">Secret Info</a></li>
-            <li><a href="mission.html" class="mission-button">Mission</a></li>
-        </ul>
+    <!-- Layout container -->
+    <div class="layout">
+        <div class="sidebar">
+            <ul>
+                <li><a href="fileEncrypt.html">File Encryption</a></li>
+                <li><a href="decryption.html">File Decryption</a></li>
+                <li><a href="contract.html">Smart Contract Interaction</a></li>
+                <li><a href="secret.html">Secret Info</a></li>
+                <li><a href="mission.html" class="mission-button">Mission</a></li>
+            </ul>
+        </div>
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <section class="card encryption-container">
+                <header class="card-header">
+                    <h1>File Encryption with AES</h1>
+                </header>
+                
+                <!-- File Upload Area -->
+                <div class="upload-area" id="dropArea">
+                    <p>Select or drag a file to encrypt</p>
+                    
+                    <div class="file-input-wrapper">
+                        <input 
+                            type="file" 
+                            id="fileInput" 
+                            class="visually-hidden"
+                            aria-label="Select file to encrypt"
+                        >
+                        <label for="fileInput" class="btn btn-primary">
+                            Choose File
+                        </label>
+                    </div>
+                    
+                    <output 
+                        id="selectedFileName" 
+                        class="selected-file-name"
+                        aria-live="polite"
+                    ></output>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button 
+                        id="encryptButton" 
+                        class="btn btn-primary" 
+                        type="button"
+                    >
+                        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                        </svg>
+                        Encrypt File
+                    </button>
+                    
+                    <button 
+                        id="downloadEncryptedButton" 
+                        class="btn btn-secondary" 
+                        type="button" 
+                        disabled
+                    >
+                        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                        Download Encrypted File
+                    </button>
+                    
+                    <button 
+                        id="uploadPinataButton" 
+                        class="btn btn-secondary" 
+                        type="button" 
+                        disabled
+                    >
+                        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+                        </svg>
+                        Upload to Pinata
+                    </button>
+                </div>
+                
+                <!-- Status and Progress -->
+                <div class="status-container">
+                    <div 
+                        id="encryptionStatus" 
+                        class="status" 
+                        role="status" 
+                        aria-live="polite"
+                    ></div>
+                    <progress 
+                        id="progressBar" 
+                        class="progress" 
+                        max="100" 
+                        value="0" 
+                        hidden
+                    ></progress>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <!-- Main content specific to encryption page -->
-    <div class="main-content">
-        <div class="encryption-container">
-            <h1>File Encryption with AES</h1>
-            
-            <div class="upload-area">
-                <p>Select a file to encrypt</p>
-                <div class="file-input-wrapper">
-                    <!-- Remove this line: <button class="custom-file-button">Choose File</button> -->
-                    <input type="file" id="fileInput">
-                    <label for="fileInput" class="custom-file-button">Choose File</label>
-                </div>
-                <div id="selectedFileName"></div>
-            </div>
-            
-            <div class="action-buttons">
-                <button id="encryptButton" class="action-button">Encrypt File</button>
-                <button id="downloadEncryptedButton" class="action-button" disabled>Download Encrypted File</button>
-                <button id="uploadPinataButton" class="action-button" disabled>Upload to Pinata</button>
-            </div>
-            
-            <div id="encryptionStatus" class="encryption-status"></div>
-        </div>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" hidden>
+        <div class="spinner"></div>
     </div>
+
+    <!-- JavaScript -->
     <script type="module" src="script.js"></script>
-    <!-- <script src="script.js"></script> -->
 </body>
 </html>
