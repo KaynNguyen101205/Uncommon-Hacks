@@ -13,25 +13,30 @@
             <li><a href="fileEncrypt.html">File Encryption</a></li>
             <li><a href="decryption.html">File Decryption</a></li>
             <li><a href="contract.html">Smart Contract Interaction</a></li>
+            <li><a href="secret.html">Secret Info</a></li>
             <li><a href="mission.html" class="mission-button">Mission</a></li>
         </ul>
     </div>
 
     <!-- Main content specific to encryption page -->
     <div class="main-content">
-        <h1 id="fileDecryption">File Decryption</h1>
-        <p>
-            Enter AES Key (hex):
-            <input type="text" id="aesKeyInput" placeholder="Paste your AES key here">
-        </p>
-        <p>
-            Select Encrypted File (JSON):
-            <input type="file" id="encryptedFileInput">
-        </p>
-        <button id="uploadDecryptButton">Upload File to Decrypt</button>
-        <button id="downloadDecryptedButton">Download Decrypted File</button>
+<!-- ============================
+       File Retrieval & Decryption Section
+       ============================ -->
+       <h1>File Retrieval & Decryption</h1>
+       <div>
+         <label for="pinataCIDInput">Enter File CID from Pinata:</label>
+         <input type="text" id="pinataCIDInput" placeholder="Enter CID">
+       </div>
+       <button id="fetchFileButton">Fetch Encrypted File from Pinata</button>
+       <br/><br/>
+       <div>
+         <label for="aesKeyInput">Enter AES Key (hex):</label>
+         <input type="text" id="aesKeyInput" placeholder="Paste your AES key here">
+       </div>
+       <button id="downloadDecryptedButton">Download Decrypted File</button>
     </div>
-
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </body>
 </html>
