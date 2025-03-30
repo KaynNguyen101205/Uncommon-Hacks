@@ -76,6 +76,10 @@ const contractABI = [
   }
 ];
 
+// Global variables for secret info
+window.lastAESKey = "";
+window.lastCID = "";
+
 // ==============================
 // Authentication Code
 // ==============================
@@ -177,13 +181,16 @@ document.getElementById('encryptButton').addEventListener('click', async () => {
     console.log("IV (hex):", bufferToHex(iv));
     console.log("Encrypted Data (hex):", bufferToHex(encryptedData));
     const exportedKey = await crypto.subtle.exportKey("raw", aesKey);
-    console.log("AES Key (hex):", bufferToHex(exportedKey));
+    const exportedKeyHex = bufferToHex(exportedKey);
+    console.log("AES Key (hex):", exportedKeyHex);
+    window.lastAESKey = exportedKeyHex; // store for secret info display
     const result = {
       iv: bufferToHex(iv),
       encryptedData: bufferToHex(encryptedData)
     };
     encryptedFileJSON = JSON.stringify(result, null, 2);
     alert("File encrypted! You can now download or upload it to Pinata.");
+    updateSecretInfo();
   };
   reader.onerror = function(error) {
     console.error("Error reading file:", error);
@@ -221,6 +228,8 @@ async function uploadToPinata(jsonContent) {
     const result = await response.json();
     console.log("File uploaded to Pinata with CID:", result.IpfsHash);
     alert("File uploaded to Pinata. CID: " + result.IpfsHash);
+    window.lastCID = result.IpfsHash; // store for secret info display
+    updateSecretInfo();
     return result;
   } catch (error) {
     console.error("Error uploading to Pinata:", error);
@@ -235,6 +244,44 @@ document.getElementById('uploadPinataButton').addEventListener('click', async ()
     return;
   }
   await uploadToPinata(encryptedFileJSON);
+});
+
+// ==============================
+// File Retrieval & Decryption Code
+// ==============================
+async function fetchFromPinata(cid) {
+  const url = `https://gateway.pinata.cloud/ipfs/${cid}`;
+  console.log("Fetching file from:", url);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch from Pinata: ${response.statusText}`);
+    }
+    const jsonContent = await response.json();
+    console.log("Fetched encrypted file JSON:", jsonContent);
+    return jsonContent;
+  } catch (error) {
+    console.error("Error fetching file from Pinata:", error);
+    alert("Error fetching file from Pinata. Check console for details.");
+    throw error;
+  }
+}
+
+document.getElementById('fetchFileButton').addEventListener('click', async () => {
+  const cid = document.getElementById('pinataCIDInput').value.trim();
+  if (!cid) {
+    alert("Please enter a valid CID.");
+    return;
+  }
+  console.log("Fetch button clicked, CID:", cid);
+  try {
+    const fetchedData = await fetchFromPinata(cid);
+    window.uploadedEncryptedFileData = fetchedData;
+    console.log("Fetched data:", fetchedData);
+    alert("Encrypted file fetched successfully from Pinata!");
+  } catch (error) {
+    console.error("Error in fetchFileButton:", error);
+  }
 });
 
 // ==============================
@@ -275,36 +322,9 @@ async function decryptData(encryptedDataHex, ivHex, key) {
   }
 }
 
-let uploadedEncryptedFileData = null;
-
-document.getElementById('uploadDecryptButton').addEventListener('click', () => {
-  const encryptedFileInput = document.getElementById('encryptedFileInput');
-  if (encryptedFileInput.files.length === 0) {
-    alert("Please select the encrypted JSON file.");
-    return;
-  }
-  const file = encryptedFileInput.files[0];
-  const reader = new FileReader();
-  reader.onload = function(event) {
-    try {
-      uploadedEncryptedFileData = JSON.parse(event.target.result);
-      console.log("Uploaded encrypted file data:", uploadedEncryptedFileData);
-      alert("Encrypted file loaded successfully!");
-    } catch (error) {
-      console.error("Error parsing JSON:", error);
-      alert("Failed to parse the encrypted file. Ensure it's a valid JSON file.");
-    }
-  };
-  reader.onerror = function(error) {
-    console.error("Error reading file:", error);
-    alert("Error reading the encrypted file.");
-  };
-  reader.readAsText(file);
-});
-
 document.getElementById('downloadDecryptedButton').addEventListener('click', async () => {
-  if (!uploadedEncryptedFileData) {
-    alert("Please upload an encrypted file first.");
+  if (!window.uploadedEncryptedFileData) {
+    alert("Please fetch an encrypted file from Pinata first.");
     return;
   }
   const aesKeyHex = document.getElementById('aesKeyInput').value.trim();
@@ -314,8 +334,8 @@ document.getElementById('downloadDecryptedButton').addEventListener('click', asy
   }
   const aesKey = await importAESKeyFromHex(aesKeyHex);
   const decryptedBuffer = await decryptData(
-    uploadedEncryptedFileData.encryptedData,
-    uploadedEncryptedFileData.iv,
+    window.uploadedEncryptedFileData.encryptedData,
+    window.uploadedEncryptedFileData.iv,
     aesKey
   );
   if (!decryptedBuffer) {
@@ -355,16 +375,16 @@ async function getContract() {
 }
 
 async function registerFile(fileCID) {
-    try {
-      const contract = await getContract();
-      const tx = await contract.registerFile(fileCID);
-      await tx.wait();
-      console.log("File registered successfully with CID:", fileCID);
-      alert("File registered successfully!");
-    } catch (error) {
-      console.error("Error registering file:", error);
-      alert("Error registering file. Check console for details.");
-    }
+  try {
+    const contract = await getContract();
+    const tx = await contract.registerFile(fileCID);
+    await tx.wait();
+    console.log("File registered successfully with CID:", fileCID);
+    alert("File registered successfully!");
+  } catch (error) {
+    console.error("Error registering file:", error);
+    alert("Error registering file. Check console for details.");
+  }
 }
 
 async function checkAccess(fileCID, userAddress) {
@@ -380,7 +400,7 @@ async function checkAccess(fileCID, userAddress) {
 }
 
 document.getElementById("registerFileButton").addEventListener("click", async () => {
-  const cid = document.getElementById("fileCIDInput").value;
+  const cid = document.getElementById("fileCIDInputSC").value;
   if (!cid) {
     alert("Please enter a file CID.");
     return;
@@ -389,7 +409,7 @@ document.getElementById("registerFileButton").addEventListener("click", async ()
 });
 
 document.getElementById("checkAccessButton").addEventListener("click", async () => {
-  const cid = document.getElementById("fileCIDInput").value;
+  const cid = document.getElementById("fileCIDInputSC").value;
   const user = document.getElementById("userAddressInput").value;
   if (!cid || !user) {
     alert("Please enter both file CID and user address.");
@@ -397,3 +417,29 @@ document.getElementById("checkAccessButton").addEventListener("click", async () 
   }
   await checkAccess(cid, user);
 });
+
+// ==============================
+// Secret Info Toggle
+// ==============================
+document.getElementById("toggleSecretButton").addEventListener("click", () => {
+  const secretDiv = document.getElementById("secretInfo");
+  if (secretDiv.style.display === "none") {
+    secretDiv.style.display = "block";
+    document.getElementById("toggleSecretButton").innerText = "Hide Secret Info";
+  } else {
+    secretDiv.style.display = "none";
+    document.getElementById("toggleSecretButton").innerText = "Show Secret Info";
+  }
+});
+
+// Update the secret info display if available
+function updateSecretInfo() {
+  const aesKeyDisplay = document.getElementById("aesKeyDisplay");
+  const fileCIDDisplay = document.getElementById("fileCIDDisplay");
+  if (window.lastAESKey) {
+    aesKeyDisplay.innerText = window.lastAESKey;
+  }
+  if (window.lastCID) {
+    fileCIDDisplay.innerText = window.lastCID;
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Decentralized Storage - Auth, Encryption, Pinata, Decryption & Smart Contract</title>
-  <!-- If not bundling, you can include ethers via CDN here:
+  <!-- If you're not bundling, include ethers.js via CDN:
        <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.esm.min.js"></script> -->
 </head>
 <body>
@@ -27,18 +27,31 @@
   <hr>
   
   <!-- ============================
-       File Decryption Section
+       Secret Info Section (AES Key & CID)
        ============================ -->
-  <h1>File Decryption</h1>
-  <p>
-    Enter AES Key (hex): 
+  <h2>Secret Info</h2>
+  <button id="toggleSecretButton">Show Secret Info</button>
+  <div id="secretInfo" style="display: none; border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
+    <p>AES Key (hex): <span id="aesKeyDisplay"></span></p>
+    <p>File CID: <span id="fileCIDDisplay"></span></p>
+  </div>
+  
+  <hr>
+  
+  <!-- ============================
+       File Retrieval & Decryption Section
+       ============================ -->
+  <h1>File Retrieval & Decryption</h1>
+  <div>
+    <label for="pinataCIDInput">Enter File CID from Pinata:</label>
+    <input type="text" id="pinataCIDInput" placeholder="Enter CID">
+  </div>
+  <button id="fetchFileButton">Fetch Encrypted File from Pinata</button>
+  <br/><br/>
+  <div>
+    <label for="aesKeyInput">Enter AES Key (hex):</label>
     <input type="text" id="aesKeyInput" placeholder="Paste your AES key here">
-  </p>
-  <p>
-    Select Encrypted File (JSON): 
-    <input type="file" id="encryptedFileInput">
-  </p>
-  <button id="uploadDecryptButton">Upload File to Decrypt</button>
+  </div>
   <button id="downloadDecryptedButton">Download Decrypted File</button>
   
   <hr>
@@ -48,8 +61,8 @@
        ============================ -->
   <h1>Smart Contract Interaction (Midnight)</h1>
   <div>
-    <label for="fileCIDInput">File CID:</label>
-    <input type="text" id="fileCIDInput" placeholder="Enter file CID">
+    <label for="fileCIDInputSC">File CID:</label>
+    <input type="text" id="fileCIDInputSC" placeholder="Enter file CID">
   </div>
   <div>
     <label for="userAddressInput">User Address:</label>
