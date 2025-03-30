@@ -1,0 +1,74 @@
+{
+    "contractName": "MidnightAccessControl",
+    "abi": [
+      {
+        "anonymous": false,
+        "inputs": [
+          { "indexed": false, "internalType": "string", "name": "fileCID", "type": "string" },
+          { "indexed": false, "internalType": "address", "name": "owner", "type": "address" }
+        ],
+        "name": "FileRegistered",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          { "indexed": false, "internalType": "string", "name": "fileCID", "type": "string" },
+          { "indexed": false, "internalType": "address", "name": "user", "type": "address" }
+        ],
+        "name": "AccessGranted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          { "indexed": false, "internalType": "string", "name": "fileCID", "type": "string" },
+          { "indexed": false, "internalType": "address", "name": "user", "type": "address" }
+        ],
+        "name": "AccessRevoked",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          { "internalType": "string", "name": "fileCID", "type": "string" }
+        ],
+        "name": "registerFile",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          { "internalType": "string", "name": "fileCID", "type": "string" },
+          { "internalType": "address", "name": "user", "type": "address" }
+        ],
+        "name": "grantAccess",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          { "internalType": "string", "name": "fileCID", "type": "string" },
+          { "internalType": "address", "name": "user", "type": "address" }
+        ],
+        "name": "revokeAccess",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          { "internalType": "string", "name": "fileCID", "type": "string" },
+          { "internalType": "address", "name": "user", "type": "address" }
+        ],
+        "name": "isAuthorized",
+        "outputs": [
+          { "internalType": "bool", "name": "", "type": "bool" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ]
+  }
+  

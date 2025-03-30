@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Decentralized Storage - Auth, Encryption, Pinata, Decryption & Smart Contract</title>
+  <!-- If not bundling, you can include ethers via CDN here:
+       <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.esm.min.js"></script> -->
+</head>
+<body>
+  <!-- ============================
+       Authentication Section
+       ============================ -->
+  <h1>User Authentication with MetaMask</h1>
+  <button id="loginButton">Login with MetaMask</button>
+  
+  <hr>
+  
+  <!-- ============================
+       File Encryption Section
+       ============================ -->
+  <h1>File Encryption with AES</h1>
+  <input type="file" id="fileInput">
+  <button id="encryptButton">Encrypt File</button>
+  <button id="downloadEncryptedButton">Download Encrypted File</button>
+  <button id="uploadPinataButton">Upload Encrypted File to Pinata</button>
+  
+  <hr>
+  
+  <!-- ============================
+       File Decryption Section
+       ============================ -->
+  <h1>File Decryption</h1>
+  <p>
+    Enter AES Key (hex): 
+    <input type="text" id="aesKeyInput" placeholder="Paste your AES key here">
+  </p>
+  <p>
+    Select Encrypted File (JSON): 
+    <input type="file" id="encryptedFileInput">
+  </p>
+  <button id="uploadDecryptButton">Upload File to Decrypt</button>
+  <button id="downloadDecryptedButton">Download Decrypted File</button>
+  
+  <hr>
+  
+  <!-- ============================
+       Smart Contract Interaction Section (Midnight)
+       ============================ -->
+  <h1>Smart Contract Interaction (Midnight)</h1>
+  <div>
+    <label for="fileCIDInput">File CID:</label>
+    <input type="text" id="fileCIDInput" placeholder="Enter file CID">
+  </div>
+  <div>
+    <label for="userAddressInput">User Address:</label>
+    <input type="text" id="userAddressInput" placeholder="Enter user address">
+  </div>
+  <button id="registerFileButton">Register File</button>
+  <button id="checkAccessButton">Check Access</button>
+  
+  <!-- Load our main script as an ES module -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
