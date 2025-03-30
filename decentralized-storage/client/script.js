@@ -284,6 +284,7 @@ document.getElementById('fetchFileButton').addEventListener('click', async () =>
   }
 });
 
+
 // ==============================
 // File Decryption Code
 // ==============================

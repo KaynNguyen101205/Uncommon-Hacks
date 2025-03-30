@@ -3,75 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <title>Decentralized Storage - Auth, Encryption, Pinata, Decryption & Smart Contract</title>
-  <!-- If you're not bundling, include ethers.js via CDN:
+  <!-- If not bundling, you can include ethers via CDN here:
        <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.esm.min.js"></script> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SafeVault</title>
+        <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="top-bar">
+    <div class="left-nav">
+        <div class="logo-nav">
+            <img src="icon.png" alt="icon">
+            <span>SafeVault</span>
+        </div>
+    </div>
+    <div class="right-nav">
+        <a href="#mission" class="mission-button">Mission</a>
+    </div>
+</div>
   <!-- ============================
        Authentication Section
        ============================ -->
-  <h1>User Authentication with MetaMask</h1>
-  <button id="loginButton">Login with MetaMask</button>
-  
-  <hr>
-  
-  <!-- ============================
-       File Encryption Section
-       ============================ -->
-  <h1>File Encryption with AES</h1>
-  <input type="file" id="fileInput">
-  <button id="encryptButton">Encrypt File</button>
-  <button id="downloadEncryptedButton">Download Encrypted File</button>
-  <button id="uploadPinataButton">Upload Encrypted File to Pinata</button>
-  
-  <hr>
-  
-  <!-- ============================
-       Secret Info Section (AES Key & CID)
-       ============================ -->
-  <h2>Secret Info</h2>
-  <button id="toggleSecretButton">Show Secret Info</button>
-  <div id="secretInfo" style="display: none; border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
-    <p>AES Key (hex): <span id="aesKeyDisplay"></span></p>
-    <p>File CID: <span id="fileCIDDisplay"></span></p>
+  <div class="container">
+        <div class="left-section">
+            <h1>Secure your <strong>files</strong> with us.</h1>
+            <p>Your files deserve a chance to be secure, we are here to help.</p>
+
+            <button id="loginButton" class="button2">Login with MetaMask</button>             
+        </div>
+        <div class="right-section">s
+            <img src="lockImage.png" alt="icon-of-lock">
+        </div>
   </div>
-  
-  <hr>
-  
-  <!-- ============================
-       File Retrieval & Decryption Section
-       ============================ -->
-  <h1>File Retrieval & Decryption</h1>
-  <div>
-    <label for="pinataCIDInput">Enter File CID from Pinata:</label>
-    <input type="text" id="pinataCIDInput" placeholder="Enter CID">
-  </div>
-  <button id="fetchFileButton">Fetch Encrypted File from Pinata</button>
-  <br/><br/>
-  <div>
-    <label for="aesKeyInput">Enter AES Key (hex):</label>
-    <input type="text" id="aesKeyInput" placeholder="Paste your AES key here">
-  </div>
-  <button id="downloadDecryptedButton">Download Decrypted File</button>
-  
-  <hr>
-  
-  <!-- ============================
-       Smart Contract Interaction Section (Midnight)
-       ============================ -->
-  <h1>Smart Contract Interaction (Midnight)</h1>
-  <div>
-    <label for="fileCIDInputSC">File CID:</label>
-    <input type="text" id="fileCIDInputSC" placeholder="Enter file CID">
-  </div>
-  <div>
-    <label for="userAddressInput">User Address:</label>
-    <input type="text" id="userAddressInput" placeholder="Enter user address">
-  </div>
-  <button id="registerFileButton">Register File</button>
-  <button id="checkAccessButton">Check Access</button>
-  
-  <!-- Load our main script as an ES module -->
+  <div id="mission" class="container2">
+    <div class="bottom-section">
+        <h1>Our <strong>Mission</strong></h1>
+        <p> At SafeVault, our passionate mission is to provide top-tier file security solutions, ensuring your digital assets remain protected through cutting-edge encryption and seamless access control, all while adhering to the core belief that security should be simple, effective, and accessible to everyone, making us your trusted partner in digital safety whether you're an individual or a business seeking reliable protection. </p>
+    </div>
+</div>
   <script type="module" src="script.js"></script>
 </body>
 </html>

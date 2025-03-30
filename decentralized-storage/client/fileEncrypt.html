@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Encryption</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sidebar (same across all pages) -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="fileEncrypt.html">File Encryption</a></li>
+            <li><a href="decryption.html">File Decryption</a></li>
+            <li><a href="contract.html">Smart Contract Interaction</a></li>
+            <li><a href="mission.html" class="mission-button">Mission</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content specific to encryption page -->
+    <div class="main-content">
+        <div class="encryption-container">
+            <h1>File Encryption with AES</h1>
+            
+            <div class="upload-area">
+                <p>Select a file to encrypt</p>
+                <div class="file-input-wrapper">
+                    <!-- Remove this line: <button class="custom-file-button">Choose File</button> -->
+                    <input type="file" id="fileInput">
+                    <label for="fileInput" class="custom-file-button">Choose File</label>
+                </div>
+                <div id="selectedFileName"></div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="encryptButton" class="action-button">Encrypt File</button>
+                <button id="downloadEncryptedButton" class="action-button" disabled>Download Encrypted File</button>
+                <button id="uploadPinataButton" class="action-button" disabled>Upload to Pinata</button>
+            </div>
+            
+            <div id="encryptionStatus" class="encryption-status"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

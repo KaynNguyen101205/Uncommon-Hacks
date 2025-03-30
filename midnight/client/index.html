@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Decentralized Storage with Midnight</title>
+  <!-- Include the Midnight Wallet SDK from the CDN (adjust the URL if needed) -->
+  <script src="https://cdn.midnight.network/wallet-sdk/v3.7.5/midnight-wallet-sdk.min.js"></script>
+</head>
+<body>
+  <!-- ============================
+       Authentication Section
+       ============================ -->
+  <h1>User Authentication with Midnight</h1>
+  <button id="loginButton">Login with Midnight</button>
+  
+  <hr>
+  
+  <!-- ============================
+       File Upload & Registration Section
+       ============================ -->
+  <h1>Upload & Register File</h1>
+  <input type="file" id="fileInput">
+  <button id="uploadFileButton">Upload File to Midnight</button>
+  <p id="uploadStatus"></p>
+  
+  <hr>
+  
+  <!-- ============================
+       File Retrieval & Decryption Section
+       ============================ -->
+  <h1>Retrieve & Decrypt File</h1>
+  <label for="cidInput">Enter File CID:</label>
+  <input type="text" id="cidInput" placeholder="Paste CID here">
+  <button id="fetchFileButton">Fetch & Decrypt File</button>
+  <p id="fetchStatus"></p>
+  
+  <!-- Load our main script as an ES module -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>

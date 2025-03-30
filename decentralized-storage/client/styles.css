@@ -1,0 +1,284 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #181818;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column; /* Stack containers vertically */
+    justify-content: flex-start; /* Start from the top */
+    align-items: center; /* Center horizontally */
+    min-height: 200vh; /* Ensures full viewport height */
+}
+
+.container, .container2 {
+    margin-top: 70px;
+    width: 100%; /* Take full width */
+    max-width: 1200px; /* Restrict max width */
+    font-size: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    padding: 20px; /* Space inside container */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.container2 {
+    margin-top: 20px; /* Adds space between container1 and container2 */
+}
+
+.left-section {
+    padding: 60px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+h1 strong {
+    color: #FFC300;
+}
+
+p {
+    color: #a0a0a0;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.button {
+    background-color: #FFC300;
+    font-size: 1rem;
+    color: #181818;
+    border: none;
+    padding: 25px 30px;
+    width: 120px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.button svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    fill: #181818;
+}
+
+.right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.right-section img {
+    width: 100%; /* Ensure the image scales to fit the container */
+    max-width: 300px; /* Restrict the max width of the image */
+    height: auto;
+    object-fit: contain;
+}
+
+.security-graphic {
+    width: 70%;
+    height: auto;
+}
+
+.top-bar {
+    font-size: 1.5rem;
+    background-color: #302F2F;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.top-bar .left-nav {
+    display: flex;
+    align-items: center;
+}
+
+.top-bar .left-nav .logo-nav {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.top-bar .left-nav .logo-nav img {
+    max-width: 40px; /* Adjust as needed */
+    margin-right: 25px;
+    height: auto; 
+}
+
+.top-bar .left-nav .logo-nav span {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #e0e0e0;
+}
+
+.top-bar .right-nav {
+    display: flex;
+    align-items: center;
+}
+
+.top-bar .right-nav a {
+    color: #f0f0f0;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.top-bar .right-nav .mission-button {
+    background-color: #FFC300;
+    color: #181818;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.bottom-section {
+    padding: 60px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.bottom-section {
+    padding: 60px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+.left-nav .logo-nav {
+    display: flex;
+    align-items: center;
+}
+
+.left-nav img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.right-nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.right-nav a:hover {
+    color: #007bff;
+}
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #333;
+    padding: 30px 0;
+    z-index: 100;
+}
+
+/* Button styling for sidebar links */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background-color: #444;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.sidebar ul li a:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Special styling for mission button */
+.sidebar ul li a.mission-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.sidebar ul li a.mission-button:hover {
+    background-color: #3e8e41;
+}
+
+/* Main content (shifted to the right) */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    
+    .main-content {
+        margin-left: 200px;
+    }
+}
+
+.button2 {
+    background-color: #FFC300;
+    font-size: 1rem;
+    color: #181818;
+    border: none;
+    padding: 10px 15px;
+    width: 200px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
